@@ -41,9 +41,5 @@ data:{confirm: 'are you sure?'}%></td>
 </tr>
 <% end %>
 </table>
-<%= form_tag(doctors_path, method: "get") do %>
-  <%= label_tag(:patient_id, "Select Patient:") %>
-  <%= select_tag(:patient_id, options_for_select(@patients), prompt: "Select") %>
-  <%= submit_tag("Submit") %>
-<% end %>
+
 

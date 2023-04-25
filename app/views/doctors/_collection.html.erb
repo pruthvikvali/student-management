@@ -1,4 +1,4 @@
-<%= form_for @doctor do |f| %>
+<%= form_for :doctor, url: doctors_path do |f| %>
 
   <% if @doctor.errors.any? %>
     <div id="error_explanation">
@@ -17,7 +17,7 @@
 
   <p>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name%>
   </p>
  
   <p>
@@ -30,10 +30,8 @@
     <%= f.text_field :contact_no %>
   </p>
 
-  #the Comment line#
 
-
-   #checking #
+ 
  
   <p>
     <%= f.submit %>

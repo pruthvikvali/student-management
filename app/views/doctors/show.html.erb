@@ -1,30 +1,13 @@
-<p>
-  <strong>name:</strong>
-  <%= @doctor.name %>
-</p>
- 
-<p>
-  <strong>email:</strong>
-  <%= @doctor.email %>
-</p>
+<%= render partial: 'header', locals: { doctor: @doctor } %>
 
-<p>
-  <strong>contact_no:</strong>
-  <%= @doctor.contact_no %>
-</p>
+
 
 <p><strong>patients:</strong></p>
 <ul>
   <%= render @doctor.patients %>
 </ul>
 
-  
-<p><strong>Add a patient:</strong></p>
 <%= render 'patients/form' %>
-
-
-
-
   
 <%= link_to 'Edit', edit_doctor_path(@doctor) %> |
 <%= link_to 'Back', doctors_path %>

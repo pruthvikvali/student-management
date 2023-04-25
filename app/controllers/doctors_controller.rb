@@ -19,8 +19,9 @@ class DoctorsController < ApplicationController
     if patient.present?
       @doctor.patients << patient
     end
+   
  
-    if @doctor.save
+    if @doctor.save()
     redirect_to @doctor
     else
     render 'new'
