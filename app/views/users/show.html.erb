@@ -1,0 +1,40 @@
+<p>
+  <strong>name:</strong>
+  <%= @user.name%>
+</p>
+ 
+<p>
+  <strong>email:</strong>
+  <%= @user.email%>
+</p>
+
+<p>
+  <strong>contact_no:</strong>
+  <%= @user.contact_no %>
+</p>
+ 
+<p>
+  <strong>gender:</strong>
+  <%= @user.gender %>
+</p>
+ 
+ <p>
+  <strong>country:</strong>
+  <%= @user.country %>
+</p>
+
+<p><strong>roles:</strong></p>
+<ul>
+  <%= render @user.roles %>
+</ul>
+
+<p><strong>Add a role:</strong></p>
+<%= render 'roles/form' %>
+
+
+
+  
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+ 

@@ -1,0 +1,57 @@
+<%= link_to 'New user', new_user_path  %>
+
+
+
+<style>
+  table {
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid black;
+  }
+  td + td, th + th {
+    border-left: none;
+  }
+</style>
+<% if @details.present? %>
+<h1>list of users<h1>
+<%= form_tag delete_users_path, method: :delete do %>
+
+<table style="border-spacing: 10px;">
+<tr>
+<th>select</th>
+<th>name</th>
+<th>email</th>
+<th>contact_no</th>
+<th>gender</th>
+<th>country</th>
+<th>role_name</th>
+<th colspan="3"><th>
+</tr>
+<% @details.each do |details| %>
+<tr>
+<td><%= check_box_tag "user_ids[]", details[:user].id %></td>
+<td><%= details[:name] %> </td>
+<td><%= details[:email] %> </td>
+<td><%= details[:contact_no] %> </td>
+<td><%= details[:gender] %> </td>
+<td><%= details[:country] %> </td>
+<td><%= details[:user_roles_detailes].join(",") %> </td>
+<td><%= link_to 'Show', user_path(details[:user]) %></td>
+<td><%= link_to 'Edit', edit_user_path(details[:user]) %></td>
+ <td><%= link_to 'Destroy', user_path(details[:user]),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+</tr>
+</table>
+<%= submit_tag "Delete selected users" %>
+<% end %>
+<% end %>
+
+<%= form_tag(users_path, method: :get) do %>
+ <%= select_tag 'user[role_id]', options_from_collection_for_select(Role.all, :id, :role) %>
+<%= submit_tag "Submit" %>
+<% end %> 
+
+

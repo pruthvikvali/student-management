@@ -1,0 +1,10 @@
+<%= form_for([@user, @user.roles.build]) do |f| %>
+  <p>
+    <%= f.label :role %><br>
+    <%= f.text_field :role %>
+  </p>
+  
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

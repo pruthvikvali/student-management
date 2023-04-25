@@ -1,0 +1,13 @@
+<h1>Listing blogs</h1>
+ <%= link_to 'New Blog', new_blog_path %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>discreption</th>
+  </tr>
+    <tr>
+
+<%= render @blogs %>
+
+
+<%= render partial: "blog", collection: @blogs %>
