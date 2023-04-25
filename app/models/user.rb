@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
       before_save :update_user_name
       before_validation :format_contact_no
       before_validation :set_default_gender
+      before_save :save_without_validation
 
 
       private

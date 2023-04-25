@@ -28,8 +28,8 @@ Rails.application.routes.draw do
 
   resources :students
 
- resources :doctors do
-  resources :patients
+resources :doctors do
+ resources :patients
 end
 
 
