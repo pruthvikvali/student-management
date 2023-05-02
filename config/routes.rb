@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   get 'doctor/index'
 
   get 'users/new'
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
 
 
 
-  resources :doctors
+  resources :doctors, only: [:index, :create, :update]
 
   resources :users do
   resources :roles
@@ -43,10 +45,7 @@ end
    root 'blogs#index' 
 
 
-   
-
-  
-end
+  end
 
 
 
@@ -73,3 +72,14 @@ end
   #    @patient = nil
    #   @doctors = Doctor.all
    # end
+
+
+
+
+
+
+
+
+   # <% if !@doctor.new_record? %>
+   # <%= hidden_field_tag :id, @doctor.id %>
+  # <% end %>

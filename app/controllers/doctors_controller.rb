@@ -1,10 +1,27 @@
 class DoctorsController < ApplicationController
   def index
-     @doctors = Doctor.all
+
+    @doctors = Doctor.all
+      if params[:search]
+        @doctors = Doctor.search(params[:search])
+      else
+        @doctors = Doctor.all
+      end
+    
+    #@patients = Patient.all.map{ |p| [p.name, p.id] }
+  
+    #if params[:patient_id].present?
+    #@patient = Patient.find(params[:patient_id])
+    #@doctors = @patient.doctors
+   # else
+   # @patient = nil
+    #@doctors = Doctor.all
+    #end
   end
 
    def show
     @doctor = Doctor.find(params[:id])
+
   end
  
 
@@ -49,6 +66,6 @@ class DoctorsController < ApplicationController
  
 private
   def doctor_params
-    params.require(:doctor).permit(:name, :email, :contact_no, :patient_name )
+    params.require(:doctor).permit(:name, :email, :contact_no, :patient_name,  :search )
   end
 end

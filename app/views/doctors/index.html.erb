@@ -11,6 +11,16 @@
     border-left: none;
   }
 </style>
+
+<%= form_tag(doctors_path, method: :get) do %>
+<p><%= text_field_tag(:search, params[:search]) %>
+<%= submit_tag ("search") %></p>
+<% end %>
+
+<% if params[:search].present? %>
+  <% if @doctors.present? %>
+    <h1><li>Search Results for: "<%= params[:search] %>":</li></h1>
+
 <h1>Listing doctors</h1>
 <table>
 <tr>
@@ -41,5 +51,13 @@ data:{confirm: 'are you sure?'}%></td>
 </tr>
 <% end %>
 </table>
+<% end %>
+<%end%>
+
+
+
+
+
+  
 
 

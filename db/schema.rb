@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230419110023) do
+ActiveRecord::Schema.define(version: 20230502093400) do
 
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at",                null: false
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20230419110023) do
     t.string   "name",         limit: 255
     t.string   "email",        limit: 255
     t.string   "contact_no",   limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "patient_name", limit: 255
+    t.string   "gender",       limit: 255
+    t.text     "city",         limit: 65535
   end
 
   create_table "patients", force: :cascade do |t|

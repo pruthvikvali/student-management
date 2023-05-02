@@ -1,7 +1,4 @@
 <%= link_to 'New user', new_user_path  %>
-
-
-
 <style>
   table {
     border-collapse: collapse;
@@ -16,7 +13,6 @@
 <% if @details.present? %>
 <h1>list of users<h1>
 <%= form_tag delete_users_path, method: :delete do %>
-
 <table style="border-spacing: 10px;">
 <tr>
 <th>select</th>

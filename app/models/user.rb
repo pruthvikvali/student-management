@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
       before_save :update_user_name
       before_validation :format_contact_no
       before_validation :set_default_gender
-      before_save :save_without_validation
+      after_update :show_message
+      after_destroy :log_destroy_action
 
 
       private
@@ -39,10 +40,18 @@ class User < ActiveRecord::Base
             self.contact_no = contact_no.gsub(/\D/, '')
       end
 
-      def save_without_validation
-            self.contact_no = contact_no_temporary # Assign the temporary value to the actual attribute
-            save(validate: false)
+      private
+      def show_message
+            puts "===========user is updated==============="
       end
+
+
+      def log_destroy_action
+            puts '=====user destroyed========'
+      end
+
+
+
 
 
 

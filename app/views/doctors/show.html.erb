@@ -1,13 +1,12 @@
-<%= render partial: 'header', locals: { doctor: @doctor } %>
 
-
+ <%= render partial: 'header', locals: { doctor: @doctor } %>
 
 <p><strong>patients:</strong></p>
 <ul>
-  <%= render @doctor.patients %>
+<%= render partial: 'patients/patient', collection: @doctor.patients %>
 </ul>
 
-<%= render 'patients/form' %>
+  <%= render 'patients/form' %>
   
 <%= link_to 'Edit', edit_doctor_path(@doctor) %> |
 <%= link_to 'Back', doctors_path %>
