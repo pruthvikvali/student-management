@@ -1,20 +1,7 @@
   
   <%= form_tag(doctors_path, method: "post") do %>
 
-  <% if @doctor.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@doctor.errors.count, "error") %> prohibited
-        this user from being saved:
-      </h2>
-      <ul>
-        <% @doctor.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
+    
    <div>
     <%= label_tag :name %> <br>
     <%= text_field_tag :'doctor[name]' %>
@@ -35,6 +22,8 @@
    </p>
    
 <% end %>
+
+#hii#
 
 
 
