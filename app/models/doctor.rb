@@ -54,7 +54,7 @@ class Doctor < ActiveRecord::Base
 # end
 
 def self.search(search)
-  where("username LIKE ?", "%#{search}%")
+  where("name LIKE ?", "%#{search}%")
   where("email LIKE ?", "%#{search}%")
 end
 

@@ -1,9 +1,22 @@
-<%= form_tag(@doctor.new_record? ? doctors_path : doctor_path(@doctor), method: @doctor.new_record? ? :post : :put) do %>
-  <%= label_tag :name, "Name" %>
-  <%= text_field_tag :name, @doctor.name %>
-  <%= label_tag :email, "Email" %>
-  <%= email_field_tag :email, @doctor.email %>
-   <%= label_tag :contact_no, "cn" %>
-  <%= text_field_tag :contact_no, @doctor.contact_no %>
-  <%= submit_tag @doctor.new_record? ? "Create" : "Update" %>
+<%= form_tag(@doctor.new_record? ? doctors_path : doctor_path(@doctor), method: @doctor.new_record? ? "post" : "put") do %>
+
+  <div>
+    <%= label_tag :name %> <br>
+    <%= text_field_tag :'doctor[name]', @doctor.name %>
+  </div>
+
+  <div>
+    <%= label_tag :email%><br>
+    <%= text_field_tag :'doctor[email]', @doctor.email %>
+  </div>
+
+  <div>
+    <%= label_tag :contact_no%><br>
+    <%= text_field_tag :'doctor[contact_no]', @doctor.contact_no %>
+  </div>
+
+  <p>
+    <%= submit_tag @doctor.new_record? ? "Create Doctor" : "Update Doctor" %>
+  </p>
+
 <% end %>

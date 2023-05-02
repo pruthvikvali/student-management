@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
       after_destroy :log_destroy_action
 
 
+      def self.search(search)
+            where("name LIKE ?", "%#{search}%")
+            where("email LIKE ?", "%#{search}%")
+      end
+
+
       private
       def set_default_gender
             self.gender = "other" if gender.blank?
