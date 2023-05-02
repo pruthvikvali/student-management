@@ -1,7 +1,7 @@
 class DoctorsController < ApplicationController
   def index
 
-    @doctors = Doctor.all
+    @doctorss = Doctor.all
       if params[:search]
         @doctors = Doctor.search(params[:search])
       else
@@ -62,6 +62,15 @@ class DoctorsController < ApplicationController
   @doctor = Doctor.find(params[:id])
   @doctor.destroy
   redirect_to doctors_path 
+  end
+
+  def save
+    @doctor = Doctor.new(doctor_params)
+    if @doctor.save()
+    redirect_to @doctor
+    else
+    render 'new'
+    end 
   end
  
 private

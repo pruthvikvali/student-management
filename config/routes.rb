@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
+  post '/doctors', to: 'doctors#save', as: 'save_doctor'
+
   get '/blogs', to: 'blogs#index', as: 'blogs' 
   get '/blogs/new', to: 'blogs#new', as: 'new_blog'   
   get '/blogs/:id', to: 'blogs#show', as: 'blog'  
