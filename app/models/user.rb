@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
       def self.search(search)
             where("name LIKE ?", "%#{search}%")
             where("email LIKE ?", "%#{search}%")
+            where("contact_no LIKE ?", "%#{search}%")
       end
 
 
