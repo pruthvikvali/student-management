@@ -45,11 +45,12 @@ data:{confirm: 'are you sure?'}%></td>
 </table>
 
 <h2>search  doctors</h2>
-<%= form_tag doctors_path(@doctors), method: :get do %>
-        <%= label_tag :search, "Search for:" %>
-        <%= text_field_tag :search, params[:search]%>
-        <%= submit_tag "Search" %>
-      <% end %>
+
+<%= form_tag(doctors_path, method: :get) do %>
+<p><%= text_field_tag(:search, params[:search]) %>
+<%= submit_tag ("search") %></p>
+<% end %>
+
 
 <% if params[:search].present? %>
   <% if @doctors.present? %>

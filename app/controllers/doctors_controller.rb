@@ -1,19 +1,12 @@
 class DoctorsController < ApplicationController
 
   def index
-
-       @doctorss = Doctor.all
-        if params[:search].present?
-            @doctors = Doctor.where("name LIKE ?", "%#{params[:search]}%")
-        else
-            @doctors = Doctor.all
-        end
-    #  @doctorss = Doctor.all
-    # if params[:search]
-    #   @doctors = Doctor.search(params[:search])
-    # else
-    #   @doctors = Doctor.all
-    # end
+     @doctorss = Doctor.all
+    if params[:search]
+      @doctors = Doctor.search(params[:search])
+    else
+      @doctors = Doctor.all
+    end
     
     #@patients = Patient.all.map{ |p| [p.name, p.id] }
   

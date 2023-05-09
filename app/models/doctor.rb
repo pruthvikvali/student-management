@@ -56,7 +56,7 @@ class Doctor < ActiveRecord::Base
 # end
 
 def self.search(search)
-  where('name LIKE :query OR email LIKE :query OR contact_no LIKE :query', { query: "%#{search}%" })[]  
+  where('name LIKE :query OR email LIKE :query OR contact_no LIKE :query', { query: "%#{search}%" }) 
 end
 
 
