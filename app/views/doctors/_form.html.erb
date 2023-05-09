@@ -29,8 +29,16 @@
     <%= f.label :contact_no%><br>
     <%= f.text_field :contact_no %>
   </p>
+   <p>
+    <%= f.label :gender%><br>
+    <%= f.text_field :gender %>
+  </p>
 
- 
+  <p>
+<%= f.label :patient_ids, "Select Patients" %>
+    <%= f.select :patient_ids, options_for_select(@patients.map{ |p| [p.name, p.id] }), {}, {multiple: true} %>
+
+ </p>
   <p>
     <%= f.submit %>
   </p>

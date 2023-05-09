@@ -1,52 +1,68 @@
 class DoctorsController < ApplicationController
+
   def index
 
-    @doctorss = Doctor.all
-      if params[:search]
-        @doctors = Doctor.search(params[:search])
-      else
-        @doctors = Doctor.all
-      end
+       @doctorss = Doctor.all
+        if params[:search].present?
+            @doctors = Doctor.where("name LIKE ?", "%#{params[:search]}%")
+        else
+            @doctors = Doctor.all
+        end
+    #  @doctorss = Doctor.all
+    # if params[:search]
+    #   @doctors = Doctor.search(params[:search])
+    # else
+    #   @doctors = Doctor.all
+    # end
     
     #@patients = Patient.all.map{ |p| [p.name, p.id] }
   
     #if params[:patient_id].present?
     #@patient = Patient.find(params[:patient_id])
     #@doctors = @patient.doctors
-   # else
-   # @patient = nil
+    #else
+    #@patient = nil
     #@doctors = Doctor.all
     #end
   end
 
-   def show
+  def show
     @doctor = Doctor.find(params[:id])
-
+    @patients = @doctor.patients
   end
  
 
   def new
     @doctor = Doctor.new
+    @patients = Patient.all
+    #@doctor_patient = @doctor.doctor_patients.build
   end
 
   def create
-    @doctor = Doctor.new(doctor_params)
-    patient = Patient.find_by(id: @doctor.id)
-
-    if patient.present?
-      @doctor.patients << patient
+     @doctor = Doctor.new(doctor_params)
+    if @doctor.save
+      redirect_to @doctor
+    else
+      render :new
     end
+    # @doctor = Doctor.new(doctor_params)
+    # patient = Patient.find_by(id: @doctor.id)
+
+    # if patient.present?
+    #   @doctor.patients << patient
+    # end
    
  
-    if @doctor.save()
-    redirect_to @doctor
-    else
-    render 'new'
-    end 
+    # if @doctor.save()
+    #   redirect_to @doctor
+    # else
+    #   render 'new'
+    # end 
   end
 
   def edit
      @doctor= Doctor.find(params[:id])
+     @patients = Patient.all
   end
 
   def update
@@ -59,9 +75,9 @@ class DoctorsController < ApplicationController
   end
 
   def destroy
-  @doctor = Doctor.find(params[:id])
-  @doctor.destroy
-  redirect_to doctors_path 
+    @doctor = Doctor.find(params[:id])
+    @doctor.destroy
+    redirect_to doctors_path 
   end
 
   def save
@@ -73,8 +89,9 @@ class DoctorsController < ApplicationController
     end 
   end
  
-private
+  private
   def doctor_params
-    params.require(:doctor).permit(:name, :email, :contact_no, :doctor,  :search )
+    params.require(:doctor).permit(:name, :email, :contact_no, :doctor, :gender, :search,patient_ids: [] )
   end
+
 end

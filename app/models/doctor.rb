@@ -6,6 +6,8 @@ class Doctor < ActiveRecord::Base
       # validates :name, presence: true,  format: { without: /\d/} 
       # validates :contact_no, presence: true, length: { is: 10 }, :unless => :validate_contact_no?
       validates :email, presence: true
+      validates :gender, presence: true, inclusion: { in: %w(male female other ) } ,on: :gender_validation
+
        
   #     attr_accessor :skip_contact_no_validation, :skip_email
 
@@ -54,9 +56,7 @@ class Doctor < ActiveRecord::Base
 # end
 
 def self.search(search)
-  where('name LIKE :query OR email LIKE :query OR contact_no LIKE :query', { query: "%#{search}%" })
-
-  
+  where('name LIKE :query OR email LIKE :query OR contact_no LIKE :query', { query: "%#{search}%" })[]  
 end
 
 
@@ -65,3 +65,17 @@ end
 
 
 end
+
+# in form partial
+# <p><strong>patients:</strong></p>
+# <ul>
+# <%= render partial: 'patients/patient', collection: @doctor.patients %>
+# </ul>
+
+#   <%= render 'patients/form' %>
+
+
+# <%= form_tag(doctors_path, method: :get) do %>
+# <p><%= text_field_tag(:search, params[:search]) %>
+# <%= submit_tag ("search") %></p>
+# <% end %>

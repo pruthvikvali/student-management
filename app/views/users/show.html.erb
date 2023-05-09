@@ -1,6 +1,9 @@
+<% if logged_in? %>Welcome, <%= current_user.name %><% end %>
+
 <p>
+
   <strong>name:</strong>
-  <%= @user.name%>
+  <%= format_name(@user)%>
 </p>
  
 <p>
@@ -22,17 +25,26 @@
   <strong>country:</strong>
   <%= @user.country %>
 </p>
+<p>
+  <strong>date of birth:</strong>
+  <%= formated_date(@user.date_of_birth) %>
+</p>
 
-<p><strong>roles:</strong></p>
-<ul>
-  <%= render @user.roles %>
-</ul>
+<p><h2>roles:</h2></strong>
+  <%= render partial: 'roles/role' , collection: @user.roles %>
+</p>
 
-<p><strong>Add a role:</strong></p>
+<p><h2>class detailes</h2>
+<%= render partial: 'live_classes/live_class', collection: @user.live_classes %>
+</p>
+
+<p><h3>Add a role:</h3>
 <%= render 'roles/form' %>
+</p>
 
-
-
+<p><h3> create class: <h3>
+<%= render 'live_classes/class_form' %>
+</p>
   
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

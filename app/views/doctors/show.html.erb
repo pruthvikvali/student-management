@@ -1,12 +1,33 @@
 
- <%= render partial: 'header', locals: { doctor: @doctor } %>
+<p>
+  <strong>name:</strong>
+  <%= format_name(@doctor) %>
+</p>
+ 
+<p>
+  <strong>email:</strong>
+  <%= @doctor.email %>
+</p>
 
-<p><strong>patients:</strong></p>
+<p>
+  <strong>contact_no:</strong>
+  <%= @doctor.contact_no %>
+</p>
+<p>
+  <strong>gender:</strong>
+  <%= @doctor.gender %>
+</p>
+
+<p><strong>Patients' Information</strong>
 <ul>
-<%= render partial: 'patients/patient', collection: @doctor.patients %>
+  <% @patients.each do |patient| %>
+    <li><%= patient.name %>  </li>
+  <% end %>
 </ul>
+</p>
 
-  <%= render 'patients/form' %>
+
+
   
 <%= link_to 'Edit', edit_doctor_path(@doctor) %> |
 <%= link_to 'Back', doctors_path %>

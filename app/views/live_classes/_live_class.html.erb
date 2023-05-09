@@ -1,0 +1,31 @@
+<style>
+  table {
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid black;
+  }
+  td + td, th + th {
+    border-left: none;
+  }
+</style>
+<table>
+  <tr>
+    <th>start_time</th>
+    <th>end_time</th>
+    <th>teacher</th>
+  </tr>
+  <tr>
+    <td>
+    <%= live_class.start_time.strftime('%B %d, %Y at %I:%M %p') if live_class.start_time.present? %>
+  </td>
+  <td>
+    <%= live_class.end_time.strftime('%B %d, %Y at %I:%M %p') if live_class.end_time.present? %>
+  </td>
+  <td>
+    <%= live_class.teacher %>
+  </td>
+    </tr>
+</table>
+
+  

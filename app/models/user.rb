@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
       has_many :roles, :through => :user_roles
       has_many :user_roles, dependent: :destroy
 
+      has_many :live_classes
+
       attr_accessor :contact_no_temporary
       
       #adding validation
@@ -19,13 +21,13 @@ class User < ActiveRecord::Base
       after_destroy :log_destroy_action
 
 
-      def self.search(search)
-            where("name LIKE ?", "%#{search}%")
-            where("email LIKE ?", "%#{search}%")
-            where("contact_no LIKE ?", "%#{search}%")
-      end
+      # def self.search(search)
+      #       where("name LIKE ?", "%#{search}%")
+      #       where("email LIKE ?", "%#{search}%")
+      #       where("contact_no LIKE ?", "%#{search}%")
+      # end
 
-
+      
       private
       def set_default_gender
             self.gender = "other" if gender.blank?
@@ -55,6 +57,10 @@ class User < ActiveRecord::Base
 
       def log_destroy_action
             puts '=====user destroyed========'
+      end
+      
+      def self.search(search)
+            where('name LIKE :query OR email LIKE :query OR contact_no LIKE :query', { query: "%#{search}%" })
       end
 
 

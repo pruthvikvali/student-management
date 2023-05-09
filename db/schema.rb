@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230502093400) do
+ActiveRecord::Schema.define(version: 20230509062238) do
 
   create_table "articles", force: :cascade do |t|
     t.datetime "created_at",                null: false
@@ -49,7 +49,19 @@ ActiveRecord::Schema.define(version: 20230502093400) do
     t.string   "patient_name", limit: 255
     t.string   "gender",       limit: 255
     t.text     "city",         limit: 65535
+    t.date     "dob"
   end
+
+  create_table "live_classes", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "teacher",    limit: 255
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "live_classes", ["user_id"], name: "index_live_classes_on_user_id", using: :btree
 
   create_table "patients", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -107,20 +119,22 @@ ActiveRecord::Schema.define(version: 20230502093400) do
   add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "email",      limit: 255
-    t.string   "contact_no", limit: 80
-    t.string   "gender",     limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "country",    limit: 255
-    t.string   "village",    limit: 255
-    t.string   "role_id",    limit: 255
+    t.string   "name",          limit: 255
+    t.string   "email",         limit: 255
+    t.string   "contact_no",    limit: 80
+    t.string   "gender",        limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "country",       limit: 255
+    t.string   "village",       limit: 255
+    t.string   "role_id",       limit: 255
+    t.datetime "date_of_birth"
   end
 
   add_foreign_key "blogs", "students"
   add_foreign_key "doctor_patients", "doctors"
   add_foreign_key "doctor_patients", "patients"
+  add_foreign_key "live_classes", "users"
   add_foreign_key "student_projects", "projects"
   add_foreign_key "student_projects", "students"
   add_foreign_key "user_roles", "roles"

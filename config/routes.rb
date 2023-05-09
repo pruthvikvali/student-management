@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  post '/doctors', to: 'doctors#save', as: 'save_doctor'
+  #post '/doctors', to: 'doctors#save', as: 'save_doctor'
 
   get '/blogs', to: 'blogs#index', as: 'blogs' 
   get '/blogs/new', to: 'blogs#new', as: 'new_blog'   
@@ -19,22 +19,31 @@ Rails.application.routes.draw do
   patch '/blogs/:id', to: 'blogs#update', as: 'update_blog'  
   delete '/blogs/:id', to: 'blogs#destroy', as: 'delete_blog'  
 
-  
-  # resources :blogs
 
 
 
   resources :doctors, only: [:index, :create, :update]
 
-  resources :users do
-  resources :roles
-  end 
+    resources :users do
+    resources :roles
+   end 
+
+   resources :users do
+   resources :live_classes
+   end 
+
+
 
   resources :students
 
-resources :doctors do
- resources :patients
-end
+  resources :doctors do
+  resources :patients
+  end
+  # get '/users/:user_id/live_classes/new', to: 'live_classes#new', as: 'new_live_class'
+  # post '/users/:user_id/live_classes', to: 'live_classes#create', as: 'create_live_class'
+  # get '/users/:user_id/live_classes/:id', to: 'live_classes#show', as: 'live_class'
+
+
 
 
   get 'docrors/index'

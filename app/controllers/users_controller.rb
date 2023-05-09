@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
+  helper_method :formated_date
+
   def index
+    if params[:search]
+        @userss = User.search(params[:search])
+      else
+        @userss = User.all
+      end
+
     @roles = Role.all
     if params[:user].present? and params[:user][:role_id].present?
       @role= Role.find_by_id(params[:user][:role_id])
@@ -28,10 +35,12 @@ class UsersController < ApplicationController
 
   def show 
    @user = User.find(params[:id]) 
+   @live_class = @user.live_classes.build
   end
 
   def new
     @user = User.new
+     
 
   end
 
@@ -76,8 +85,14 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :contact_no, :gender, :country, :role_id )
+    params.require(:user).permit(:name, :email, :contact_no, :gender, :country, :role_id,:date_of_birth  )
   end
+
+ def formated_date(date)
+            date.strftime('%B %d, %Y at %I:%M %p')  if @user.date_of_birth.present?
+      end
+
+ 
 end
 
 

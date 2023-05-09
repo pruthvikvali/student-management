@@ -50,4 +50,53 @@
 <%= submit_tag "Submit" %>
 <% end %> 
 
+<h2>search  doctors</h2>
+<%= form_tag(users_path, method: :get) do %>
+<p><%= text_field_tag(:search, params[:search]) %>
+<%= submit_tag ("search") %></p>
+<% end %>
+
+<% if params[:search].present? %>
+<% if @userss.present? %>
+<h1>list of users<h1>
+<%= form_tag delete_users_path, method: :delete do %>
+<table style="border-spacing: 10px;">
+<tr>
+<th>select</th>
+<th>name</th>
+<th>email</th>
+<th>contact_no</th>
+<th>gender</th>
+<th>country</th>
+<th>role_name</th>
+<th colspan="3"><th>
+</tr>
+<% @userss.each do |user| %>
+<tr>
+<td><%= check_box_tag "user_ids[]", user.id %></td>
+<td><%=user.name  %> </td>
+<td><%= user.email %> </td>
+<td><%= user.contact_no %> </td>
+<td><%= user.gender %> </td>
+<td><%= user.country %> </td>
+<td>
+<ul>
+<% user.roles.each do|role| %>
+<li><%= role.role %></li>
+<% end %>
+</ul>
+</td>
+<td><%= link_to 'Show', user_path(user) %></td>
+<td><%= link_to 'Edit', edit_user_path(user) %></td>
+ <td><%= link_to 'Destroy', user_path(user),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+<% end %>
+<% end %>
+<% end %>
+
+
+
+
 
